@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Black Jack</title>
+</head>
+<body>
+   <div class="wraper">
+       
+       <div class="container">
+           <div data-select-score class="scores">
+               <div>
+                   Bet: $<span data-bet-amount>0</span>
+               </div>
+               <div>
+                   Bank: $<span data-bank>100</span>
+               </div>
+               <div>Dealer: <span class="dealer-score">0</span>
+               </div>
+               <div>Player: <span class="player-score">
+                   0</span>
+               </div>
+               <div class="buttons">
+                   <button data-deal-button>Deal</button>
+                   <button data-hit-button>Hit</button>
+                   <button data-stand-button>Stand</button>
+               </div>
+               <div class="bet-buttons">
+                   <button data-raise-button>&#8593;</button>
+                   <button data-bet-button>Bet</button>
+                   <button data-lower-button>&#8595;</button>
+               </div>
+               <button data-next-round>Next Round</button>
+           </div>
+           </div>
+           <div class="cards-wrap">
+               <div class="player-cards cards">
+       
+               </div>
+               <div class="dealer-cards cards">
+           </div>
+       
+           </div>
+       
+       
+       <!-- <div data-select-heart class="card">
+           <div class="card-front">
+               <img src="/001-heart.png" alt="" class="icon-top">
+               <h2 data-select-text class="card-text">A</h2>
+               <img src="/001-heart.png" alt="" class="icon-bottom">
+           </div>
+           <div class="card-back">
+           </div>
+       </div> -->
+       
+       <!-- <div data-select-spade class="card">
+           <div class="card-front">
+               <img src="/002-spade-symbol.png" alt="" class="icon-top">
+               <h2 data-select-text class="card-text">Q</h2>
+               <img src="/002-spade-symbol.png" alt="" class="icon-bottom">
+           </div>
+           <div class="card-back">
+           </div>
+       </div> -->
+       <!-- <div data-select-club class="card">
+           <div class="card-front">
+               <img src="/clubs.png" alt="" class="icon-top">
+               <h2 data-select-text class="card-text">A</h2>
+               <img src="/clubs.png" alt="" class="icon-bottom">
+           </div>
+           <div class="card-back">
+           </div>
+       </div> -->
+       <!-- <div  data-select-diamond class="card">
+           <div class="card-front">
+               <img src="/004-diamond.png" alt="" class="icon-top">
+               <h2 data-select-text class="card-text">A</h2>
+               <img src="./004-diamond.png" alt="" class="icon-bottom">
+           </div>
+           <div class="card-back">
+           </div>
+       </div> -->
+   </div>
+   
+    <script src="/index.js" type="module"></script>
+    <script src="/deck.js"></script>
+    <script src="/bank.js"></script>
+</body>
+</html>

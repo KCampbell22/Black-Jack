@@ -1,0 +1,79 @@
+html,body{
+    background-color: green;
+    height: 100vh;
+}
+.container{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    position: absolute;
+}
+
+.player-cards, .dealer-cards {
+    max-width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cards-wrap{
+    max-width: 300px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;    
+    align-items: flex-start;
+    flex-direction: column-reverse;
+}
+
+.card{
+    width: 100px;
+    height: 150px;
+    margin: 10px;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+    font-size: 3rem;
+    position: relative;
+}
+
+
+.card::before{
+    top: .5rem;
+    left: .5rem;
+}
+
+.card::before, .card::after{
+    content: attr(data-value);
+    font-size: 1rem;
+    position: absolute; 
+}
+
+
+.card::after{
+    bottom: .5rem;
+    right: .5rem;
+    transform: rotate(180deg);
+}
+
+.card.red{
+color: red;
+}
+
+.card.black{
+color: black;
+}
+
+
+.buttons, .bet-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
