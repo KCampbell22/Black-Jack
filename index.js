@@ -38,21 +38,21 @@ function startGame() {
        const playerCardOne = deck.cards.pop()
        const playerCardTwo = deck.cards.pop();
        const computerCardOne = deck.cards.pop()
-       const computerCardTwo= deck.cards.pop()
+       
        //Handle the Ace score less than 10 ace is 11, if score is above 11 ace is 1
         
        
        playerCards.appendChild(playerCardOne.getHtml());
        playerCards.appendChild(playerCardTwo.getHtml());
        computerCards.appendChild(computerCardOne.getHtml());
-       computerCards.appendChild(computerCardTwo.getHtml());
+       
 
         playerScoreAmmount.innerHTML = parseInt(playerCardOne.addScore()) + parseInt(playerCardTwo.addScore());
-        computerScoreAmmount.innerHTML = parseInt(computerCardOne.addScore()) + parseInt(computerCardTwo.addScore());
+        computerScoreAmmount.innerHTML = parseInt(computerCardOne.addScore());
         
         for (var item in playerCards.children) {
             if (item.value === 'A') {
-                if (playerScoreAmmount.innerHTML >='11') {
+                if (playerScoreAmmount.innerHTML >='11' || computerCards.innerHTML >='11') {
                     item.innerHTML = '1';
                 }
                 else {
@@ -69,14 +69,6 @@ function startGame() {
                     item.innerHTML = '11';
                 }
             }
-        }
-
-
-        if (parseInt(computerScoreAmmount.innerHTML) < '16') {
-            let computerCard = deck.cards.pop();
-            computerCards.appendChild(computerCard.getHtml());
-            computerScoreAmmount.innerHTML = parseInt(computerScoreAmmount.innerHTML) + parseInt(computerCard.addScore());
-
         }
     }
 
@@ -117,11 +109,11 @@ document.querySelector('[data-lower-button]').addEventListener('click', function
 
 });
 
+
+//button event for player to deal cards
 document.querySelector('[data-hit-button]').addEventListener('click', function() {
     let playerCard = deck.cards.pop();
-    let dealerCard = deck.cards.pop();
     playerCards.appendChild(playerCard.getHtml());
-    computerCards.appendChild(dealerCard.getHtml());
     playerScoreAmmount.innerHTML = parseInt(playerScoreAmmount.innerHTML) + parseInt(playerCard.addScore());
     computerScoreAmmount.innerHTML = parseInt(computerScoreAmmount.innerHTML) + parseInt(dealerCard.addScore());
     if (playerScoreAmmount.innerHTML > '21' && computerScoreAmmount.innerHTML < '21' || computerScoreAmmount.innerHTML == '21') {
@@ -153,11 +145,25 @@ document.querySelector('[data-hit-button]').addEventListener('click', function()
         let scoreSection = document.querySelector('.scores')
         scoreSection.appendChild(winner);
         gameOver();
+        dealerHit()
     }
-
+    
     
 });
 
+//Once player is done, computer will hit until they have a score of 16 or more
+function dealerHit() {
+    //checks if stand button is clicked
+    //checks if player score is 21 or greater than 21
+     
+     do {
+        var dealerCard = deck.cards.pop();
+    computerCards.appendChild(dealerCard.getHtml());
+    computerScoreAmmount.innerHTML = parseInt(computerScoreAmmount.innerHTML) + parseInt(dealerCard.addScore());
+    
+    } while (computerScoreAmmount.innerHTML < '16')
+   
+}
 
 
 document.querySelector('[data-next-round]').addEventListener('click', function() {
@@ -188,7 +194,10 @@ document.querySelector('[data-next-round]').addEventListener('click', function()
     document.querySelector('.winner').innerHTML = '';
 });
 
-document.querySelector('[data-stand-button]').addEventListener('click', winningConditions); 
+document.querySelector('[data-stand-button]').addEventListener('click', function() {
+    dealerHit();
+    winningConditions();
+}); 
     // winning conditions
 
 
@@ -212,7 +221,57 @@ function winningConditions(){
         let scoreSection = document.querySelector('.scores')
         scoreSection.appendChild(winner);
     }
+
+    if (playerScoreAmmount.innerHTML < computerScoreAmmount.innerHTML) {
+        document.querySelector('[data-hit-button]').disabled = true;
+        document.querySelector('[data-next-round]').style.display = 'block';
+        let winner = document.createElement('div');
+        winner.className = 'winner';
+        winner.innerText = 'You Win';
+        let scoreSection = document.querySelector('.scores')
+        scoreSection.appendChild(winner);
+    }
+
+    if (playerScoreAmmount.innerHTML > computerScoreAmmount.innerHTML) {
+        document.querySelector('[data-hit-button]').disabled = true;
+        document.querySelector('[data-next-round]').style.display = 'block';
+        let winner = document.createElement('div');
+        winner.className = 'winner';
+        winner.innerText = 'You Lose';
+        let scoreSection = document.querySelector('.scores')
+        scoreSection.appendChild(winner);
+    }
     document.querySelector('[data-next-round]').style.display = 'block';
+    document.querySelector('[data-stand-button]').disabled = true; 
+    if (computerScoreAmmount.innerHTML > '21' && playerScoreAmmount.innerHTML < '21' || playerScoreAmmount.innerHTML == '21') {
+        document.querySelector('[data-hit-button]').disabled = true;
+        document.querySelector('[data-next-round]').style.display = 'block';
+        let winner = document.createElement('div');
+        winner.className = 'winner';
+        winner.innerText = 'You Lose';
+        let scoreSection = document.querySelector('.scores')
+        scoreSection.appendChild(winner);
+        gameOver();
+    }
+    if (computerScoreAmmount.innerHTML > '21' && playerScoreAmmount.innerHTML > '21') {
+        document.querySelector('[data-hit-button]').disabled = true;
+        document.querySelector('[data-next-round]').style.display = 'block';
+        let winner = document.createElement('div');
+        winner.className = 'winner';
+        winner.innerText = 'You Lose';
+        let scoreSection = document.querySelector('.scores')
+        scoreSection.appendChild(winner);
+        gameOver();
+    }
+    if (computerScoreAmmount.innerHTML > '21' && playerScoreAmmount.innerHTML < '21' || playerScoreAmmount.innerHTML == '21') {
+        document.querySelector('[data-hit-button]').disabled = true;
+        document.querySelector('[data-next-round]').style.display = 'block';
+        let winner = document.createElement('div');
+        winner.className = 'winner';
+        winner.innerText = 'You win';
+        let scoreSection = document.querySelector('.scores')
+        scoreSection.appendChild(winner);
+}
 
 }
 //game is over when bank is empty
