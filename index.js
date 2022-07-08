@@ -52,7 +52,7 @@ function startGame() {
         
         for (var item in playerCards.children) {
             if (item.value === 'A') {
-                if (playerScoreAmmount.innerHTML > '10') {
+                if (playerScoreAmmount.innerHTML >='11') {
                     item.innerHTML = '1';
                 }
                 else {
@@ -201,6 +201,7 @@ function winningConditions(){
         winner.innerText = 'You Lose';
         let scoreSection = document.querySelector('.scores')
         scoreSection.appendChild(winner);
+        // next round button pops up
     }
     if (playerScoreAmmount.innerHTML < '21' && computerScoreAmmount.innerHTML > '21') {
         document.querySelector('[data-hit-button]').disabled = true;
@@ -211,6 +212,8 @@ function winningConditions(){
         let scoreSection = document.querySelector('.scores')
         scoreSection.appendChild(winner);
     }
+    document.querySelector('[data-next-round]').style.display = 'block';
+
 }
 //game is over when bank is empty
 function gameOver(){
